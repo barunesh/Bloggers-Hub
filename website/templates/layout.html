@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Blogger's Hub</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+    .container-fluid {
+      padding: 10px 10px;
+    }
+    </style>
+  </head>
+  <body>
+    {% include 'includes/_navbar.html' %}
+    <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-4">
+          <center>
+        <img src="{{url_for('static',filename=image[0])}}" alt="{{image[0]}}" width="250" height="350" onclick="writeCookie(this)">
+        <div class="top-right">Advertisement</div>
+      </center>
+    </div>
+      <div class="col-sm-4">
+          <center>
+        {% block body %}{% endblock %}
+      </center>
+      </div>
+      <div class="col-sm-4">
+          <center>
+        <img src="{{url_for('static',filename=image[1])}}" alt="{{image[1]}}" width="250" height="350" onclick="writeCookie(this)">
+        <div class="top-right">Advertisement</div>
+      </center>
+    </div>
+    </div>
+  </div>
+    <script>
+    var myCookie={};
+    var myCookie2 = {};
+            function writeCookie(imgs)
+            {
+              myCookie["_predict"]=1;
+               var cookieString="";
+              for(var key in myCookie){
+                 cookieString = key+"="+myCookie[key]+";";
+                 document.cookie=cookieString;
+              }
+              var cookieString="";
+              imgtext = imgs.alt.split('/');
+              imgtext = imgtext[1].split('.');
+              myCookie2["_img"] = imgtext[0];
+              for(var key in myCookie2){
+                cookieString = key+"="+myCookie2[key]+";";
+                document.cookie = cookieString
+              }
+            }
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  </body>
+</html>
